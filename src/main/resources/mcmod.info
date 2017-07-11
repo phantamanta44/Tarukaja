@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tarukaja",
+  "name": "Tarukaja",
+  "description": "WEAK",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["phantamanta44"],
+  "credits": "ATLUS and SEGA",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
