@@ -16,14 +16,12 @@ public class ParticleHealthbar extends ParticleMod {
 
     private static final Map<Entity, ParticleHealthbar> targets = new HashMap<>();
 
-    public static void tryDisplay(Entity target) {
-        if (target instanceof EntityLivingBase) {
-            ParticleHealthbar particle = targets.get(target);
-            if (particle != null)
-                particle.refreshTimer();
-            else
-                Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleHealthbar((EntityLivingBase)target));
-        }
+    public static void tryDisplay(EntityLivingBase target) {
+        ParticleHealthbar particle = targets.get(target);
+        if (particle != null)
+            particle.refreshTimer();
+        else
+            Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleHealthbar(target));
     }
 
     private final EntityLivingBase target;
@@ -42,9 +40,9 @@ public class ParticleHealthbar extends ParticleMod {
     public void onUpdate() {
         if (particleAge++ >= particleMaxAge)
             setExpired();
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
+        prevPosX = posX;
+        prevPosY = posY;
+        prevPosZ = posZ;
         setPosition(target.posX, target.posY + target.getEyeHeight() + 1, target.posZ);
         healthOffset = 34 * target.getHealth() / target.getMaxHealth();
         if (slowHealthOffset > healthOffset)
@@ -56,13 +54,15 @@ public class ParticleHealthbar extends ParticleMod {
     @Override
     protected void render(Tessellator tess, Entity entity, float partialTicks) {
         Minecraft.getMinecraft().getTextureManager().bindTexture(ResConst.TEX_WIDGETS);
+        boolean alive = target.isEntityAlive();
         if (target.hurtTime > 0) {
             renderLayer(tess, 1, 0, 80);
-            refreshTimer();
+            if (alive)
+                refreshTimer();
         } else {
             renderLayer(tess, 0, 0, 80);
         }
-        if (target.isEntityAlive()) {
+        if (alive) {
             if (slowHealthOffset > healthOffset)
                 renderLayer(tess, 1, 1, 16 + slowHealthOffset);
             renderLayer(tess, 0, 1, 16 + healthOffset);

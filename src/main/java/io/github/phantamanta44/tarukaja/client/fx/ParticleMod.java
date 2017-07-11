@@ -41,19 +41,19 @@ public abstract class ParticleMod extends Particle {
         return new Vec3d[] {
                 new Vec3d(
                         x + (rotX * scale * (-scaleX + offX) - rotXY * scale * scaleY),
-                        y - rotZ * scale,
+                        y - rotZ * scale * scaleY,
                         z + (rotYZ * scale * (-scaleX + offX) - rotXZ * scale * scaleY)),
                 new Vec3d(
                         x + (rotX * scale * (-scaleX + offX) + rotXY * scale * scaleY),
-                        y + rotZ * scale,
+                        y + rotZ * scale * scaleY,
                         z + (rotYZ * scale * (-scaleX + offX) + rotXZ * scale * scaleY)),
                 new Vec3d(
                         x + (rotX * scale * (scaleX + offX) + rotXY * scale * scaleY),
-                        y + rotZ * scale,
+                        y + rotZ * scale * scaleY,
                         z + (rotYZ * scale * (scaleX + offX) + rotXZ * scale * scaleY)),
                 new Vec3d(
                         x + (rotX * scale * (scaleX + offX) - rotXY * scale * scaleY),
-                        y - rotZ * scale,
+                        y - rotZ * scale * scaleY,
                         z + (rotYZ * scale * (scaleX + offX) - rotXZ * scale * scaleY))
         };
     }
