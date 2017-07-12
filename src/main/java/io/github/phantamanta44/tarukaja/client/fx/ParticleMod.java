@@ -40,21 +40,21 @@ public abstract class ParticleMod extends Particle {
         float scale = particleScale / 10F;
         return new Vec3d[] {
                 new Vec3d(
-                        x + (rotX * scale * (-scaleX + offX) - rotXY * scale * scaleY),
-                        y - rotZ * scale * scaleY,
-                        z + (rotYZ * scale * (-scaleX + offX) - rotXZ * scale * scaleY)),
+                        x + rotX * scale * (-scaleX + offX) + rotXY * scale * (-scaleY + offY),
+                        y + rotZ * scale * (-scaleY + offY),
+                        z + rotYZ * scale * (-scaleX + offX) + rotXZ * scale * (-scaleY + offY)),
                 new Vec3d(
-                        x + (rotX * scale * (-scaleX + offX) + rotXY * scale * scaleY),
-                        y + rotZ * scale * scaleY,
-                        z + (rotYZ * scale * (-scaleX + offX) + rotXZ * scale * scaleY)),
+                        x + rotX * scale * (-scaleX + offX) + rotXY * scale * (scaleY + offY),
+                        y + rotZ * scale * (scaleY + offY),
+                        z + rotYZ * scale * (-scaleX + offX) + rotXZ * scale * (scaleY + offY)),
                 new Vec3d(
-                        x + (rotX * scale * (scaleX + offX) + rotXY * scale * scaleY),
-                        y + rotZ * scale * scaleY,
-                        z + (rotYZ * scale * (scaleX + offX) + rotXZ * scale * scaleY)),
+                        x + rotX * scale * (scaleX + offX) + rotXY * scale * (scaleY + offY),
+                        y + rotZ * scale * (scaleY + offY),
+                        z + rotYZ * scale * (scaleX + offX) + rotXZ * scale * (scaleY + offY)),
                 new Vec3d(
-                        x + (rotX * scale * (scaleX + offX) - rotXY * scale * scaleY),
-                        y - rotZ * scale * scaleY,
-                        z + (rotYZ * scale * (scaleX + offX) - rotXZ * scale * scaleY))
+                        x + rotX * scale * (scaleX + offX) + rotXY * scale * (-scaleY + offY),
+                        y + rotZ * scale * (-scaleY + offY),
+                        z + rotYZ * scale * (scaleX + offX) + rotXZ * scale * (-scaleY + offY))
         };
     }
 

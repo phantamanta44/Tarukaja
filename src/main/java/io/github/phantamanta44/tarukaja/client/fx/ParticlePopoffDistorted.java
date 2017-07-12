@@ -48,10 +48,10 @@ public class ParticlePopoffDistorted extends ParticleMod {
 
         long time = System.currentTimeMillis();
         Vec3d[] vertices = calculateVertices(
-                0.03F * MathHelper.cos((time % 250) * 0.0251F),
-                1F + 0.03F * MathHelper.cos((time % 200) * 0.0314F),
-                0.03F * MathHelper.sin((time % 275) * 0.0228F),
-                0.5F + 0.03F * MathHelper.sin((time % 225) * 0.0279F));
+                0.03F * MathHelper.cos((time % 225) * 0.0279F),
+                1F + 0.03F * MathHelper.cos((time % 175) * 0.0359F),
+                0.03F * MathHelper.sin((time % 150) * 0.0419F),
+                0.5F + 0.03F * MathHelper.sin((time % 200) * 0.0314F));
         tess.getBuffer().pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(1D, vMax).endVertex();
         tess.getBuffer().pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(1D, vMin).endVertex();
         tess.getBuffer().pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(0.5D, vMin).endVertex();

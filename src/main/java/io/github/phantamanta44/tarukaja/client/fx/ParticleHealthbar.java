@@ -55,31 +55,33 @@ public class ParticleHealthbar extends ParticleMod {
     protected void render(Tessellator tess, Entity entity, float partialTicks) {
         Minecraft.getMinecraft().getTextureManager().bindTexture(ResConst.TEX_WIDGETS);
         boolean alive = target.isEntityAlive();
+        double shakeOffsetX = 0D, shakeOffsetY = 0D;
         if (target.hurtTime > 0) {
-            renderLayer(tess, 1, 0, 80);
+            shakeOffsetX = 0.15D - 0.3D * rand.nextDouble();
+            shakeOffsetY = 0.15D - 0.3D * rand.nextDouble();
+            renderLayer(tess, 1, 0, 80, shakeOffsetX, shakeOffsetY);
             if (alive)
                 refreshTimer();
         } else {
-            renderLayer(tess, 0, 0, 80);
+            renderLayer(tess, 0, 0, 80, 0, 0);
         }
         if (alive) {
             if (slowHealthOffset > healthOffset)
-                renderLayer(tess, 1, 1, 16 + slowHealthOffset);
-            renderLayer(tess, 0, 1, 16 + healthOffset);
+                renderLayer(tess, 1, 1, 16 + slowHealthOffset, shakeOffsetX, shakeOffsetY);
+            renderLayer(tess, 0, 1, 16 + healthOffset, shakeOffsetX, shakeOffsetY);
         } else {
-            renderLayer(tess, 2, 1, 80);
+            renderLayer(tess, 2, 1, 80, shakeOffsetX, shakeOffsetY);
         }
     }
 
-    private void renderLayer(Tessellator tess, int tIndX, int tIndY, double xAmt) {
-        // xOff = 16, xAmt = 34
+    private void renderLayer(Tessellator tess, int tIndX, int tIndY, double xAmt, double shakeOffsetX, double shakeOffsetY) {
         tess.getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
         double xMin = tIndX * 80, yMin = tIndY * 80;
         double xMax = (xMin + xAmt) / 256D, yMax = (yMin + 80) / 256D;
         double xFactor = (xAmt) / 80D;
         xMin /= 256D;
         yMin /= 256D;
-        Vec3d[] vertices = calculateVertices(1 - xFactor, xFactor, 0, 1);
+        Vec3d[] vertices = calculateVertices(1 - xFactor + shakeOffsetX, xFactor, shakeOffsetY, 1);
         tess.getBuffer().pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(xMax, yMax).endVertex();
         tess.getBuffer().pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(xMax, yMin).endVertex();
         tess.getBuffer().pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(xMin, yMin).endVertex();
