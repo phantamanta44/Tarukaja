@@ -1,8 +1,10 @@
 package io.github.phantamanta44.tarukaja.client.util;
 
+import io.github.phantamanta44.tarukaja.client.fx.ParticleDamage;
 import io.github.phantamanta44.tarukaja.client.fx.ParticleHealthbar;
 import io.github.phantamanta44.tarukaja.client.fx.ParticlePopoff;
 import io.github.phantamanta44.tarukaja.client.fx.ParticlePopoffDistorted;
+import io.github.phantamanta44.tarukaja.event.DamageHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -10,7 +12,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 
-public class PopoffUtils {
+public class PopoffHelper {
 
     public static void onDamage(EntityLivingBase entity, DamageSource source, float amount) {
         if (source != DamageSource.generic && entity != Minecraft.getMinecraft().thePlayer) {
@@ -24,11 +26,12 @@ public class PopoffUtils {
                 Minecraft.getMinecraft().effectRenderer.addEffect(new ParticlePopoff(entity, 1, 3));
             } else if (canShield
                     || ((source == DamageSource.anvil || source == DamageSource.fallingBlock) && entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD) != null)) {
-                System.out.println("anvil");
                 ParticleHealthbar.tryDisplay(entity);
+                Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleDamage(entity, amount * 10F * DamageHandler.DAMAGE_FACTOR));
                 Minecraft.getMinecraft().effectRenderer.addEffect(new ParticlePopoffDistorted(entity, 2));
             } else if (entity.isEntityAlive()) {
                 ParticleHealthbar.tryDisplay(entity);
+                Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleDamage(entity, amount * 10F * DamageHandler.DAMAGE_FACTOR));
             }
         }
     }

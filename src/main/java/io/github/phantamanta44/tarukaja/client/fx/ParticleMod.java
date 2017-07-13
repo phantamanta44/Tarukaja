@@ -33,10 +33,14 @@ public abstract class ParticleMod extends Particle {
         return calculateVertices(0, 1, 0, 1);
     }
 
-    protected Vec3d[] calculateVertices(double offX, double scaleX, double offY, double scaleY) { // TODO offY
-        float x = (float)(prevPosX + (posX - prevPosX) * (double)partialTicks - interpPosX);
-        float y = (float)(prevPosY + (posY - prevPosY) * (double)partialTicks - interpPosY);
-        float z = (float)(prevPosZ + (posZ - prevPosZ) * (double)partialTicks - interpPosZ);
+    protected Vec3d[] calculateVertices(double offX, double scaleX, double offY, double scaleY) {
+        return calculateVertices(offX, scaleX, offY, scaleY, 1);
+    }
+
+    protected Vec3d[] calculateVertices(double offX, double scaleX, double offY, double scaleY, float scaleZ) {
+        float x = (float)(prevPosX + (posX - prevPosX) * (double)partialTicks - interpPosX) * scaleZ;
+        float y = (float)(prevPosY + (posY - prevPosY) * (double)partialTicks - interpPosY) * scaleZ;
+        float z = (float)(prevPosZ + (posZ - prevPosZ) * (double)partialTicks - interpPosZ) * scaleZ;
         float scale = particleScale / 10F;
         return new Vec3d[] {
                 new Vec3d(

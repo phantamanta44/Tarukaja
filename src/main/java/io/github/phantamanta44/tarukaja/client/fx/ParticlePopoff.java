@@ -15,7 +15,7 @@ public class ParticlePopoff extends ParticleMod {
     private final double uMin, vMin, uMax, vMax;
 
     public ParticlePopoff(EntityLivingBase entity, int xIndex, int yIndex) {
-        super(entity.getEntityWorld(), entity.posX, entity.posY + entity.getEyeHeight() + 1, entity.posZ);
+        super(entity.getEntityWorld(), entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
         this.uMin = xIndex * 128 / 256D;
         this.vMin = yIndex * 64 / 256D;
         this.uMax = (xIndex + 1) * 128 / 256D;
@@ -47,7 +47,7 @@ public class ParticlePopoff extends ParticleMod {
         GlStateManager.color(1F, 1F, 1F, particleAlpha);
         tess.getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
-        Vec3d[] vertices = calculateVertices(0, 1, 0, 0.5D);
+        Vec3d[] vertices = calculateVertices(0, 1, 0, 0.5D, 0.7F);
         tess.getBuffer().pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(uMax, vMax).endVertex();
         tess.getBuffer().pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(uMax, vMin).endVertex();
         tess.getBuffer().pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(uMin, vMin).endVertex();

@@ -1,6 +1,6 @@
 package io.github.phantamanta44.tarukaja.network;
 
-import io.github.phantamanta44.tarukaja.client.util.PopoffUtils;
+import io.github.phantamanta44.tarukaja.client.util.PopoffHelper;
 import io.github.phantamanta44.tarukaja.util.LowUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -91,7 +91,7 @@ public class SPacketEntityDamage implements IMessage {
                     .getEntityByID(msg.entityId);
             if (entity != null) {
                 entity.setHealth(msg.health);
-                PopoffUtils.onDamage(entity, msg.source, msg.amount);
+                PopoffHelper.onDamage(entity, msg.source, msg.amount);
             }
             return null;
         }

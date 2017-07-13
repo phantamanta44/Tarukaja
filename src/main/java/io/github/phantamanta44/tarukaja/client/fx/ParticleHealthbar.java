@@ -28,7 +28,7 @@ public class ParticleHealthbar extends ParticleMod {
     private float healthOffset, slowHealthOffset;
 
     public ParticleHealthbar(EntityLivingBase entity) {
-        super(entity.getEntityWorld(), entity.posX, entity.posY + entity.getEyeHeight() + 1, entity.posZ);
+        super(entity.getEntityWorld(), entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
         this.target = entity;
         this.particleMaxAge = 36;
         this.particleScale = 5;
@@ -43,7 +43,7 @@ public class ParticleHealthbar extends ParticleMod {
         prevPosX = posX;
         prevPosY = posY;
         prevPosZ = posZ;
-        setPosition(target.posX, target.posY + target.getEyeHeight() + 1, target.posZ);
+        setPosition(target.posX, target.posY + target.getEyeHeight(), target.posZ);
         healthOffset = 34 * target.getHealth() / target.getMaxHealth();
         if (slowHealthOffset > healthOffset)
             slowHealthOffset--;
@@ -81,7 +81,7 @@ public class ParticleHealthbar extends ParticleMod {
         double xFactor = (xAmt) / 80D;
         xMin /= 256D;
         yMin /= 256D;
-        Vec3d[] vertices = calculateVertices(1 - xFactor + shakeOffsetX, xFactor, shakeOffsetY, 1);
+        Vec3d[] vertices = calculateVertices(1 - xFactor + shakeOffsetX - 1.5D, xFactor, shakeOffsetY + 0.5D, 1, 0.75F);
         tess.getBuffer().pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(xMax, yMax).endVertex();
         tess.getBuffer().pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(xMax, yMin).endVertex();
         tess.getBuffer().pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(xMin, yMin).endVertex();

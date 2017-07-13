@@ -16,7 +16,7 @@ public class ParticlePopoffDistorted extends ParticleMod {
     private final double vMin, vMax;
 
     public ParticlePopoffDistorted(EntityLivingBase entity, int yIndex) {
-        super(entity.getEntityWorld(), entity.posX, entity.posY + entity.getEyeHeight() + 1, entity.posZ);
+        super(entity.getEntityWorld(), entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
         this.vMin = yIndex * 64 / 256D;
         this.vMax = (yIndex + 1) * 64 / 256D;
         this.particleMaxAge = 32;
@@ -50,14 +50,15 @@ public class ParticlePopoffDistorted extends ParticleMod {
         Vec3d[] vertices = calculateVertices(
                 0.03F * MathHelper.cos((time % 225) * 0.0279F),
                 1F + 0.03F * MathHelper.cos((time % 175) * 0.0359F),
-                0.03F * MathHelper.sin((time % 150) * 0.0419F),
-                0.5F + 0.03F * MathHelper.sin((time % 200) * 0.0314F));
+                0.03F * MathHelper.sin((time % 250) * 0.0251F),
+                0.5F + 0.03F * MathHelper.sin((time % 200) * 0.0314F),
+                0.7F);
         tess.getBuffer().pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(1D, vMax).endVertex();
         tess.getBuffer().pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(1D, vMin).endVertex();
         tess.getBuffer().pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(0.5D, vMin).endVertex();
         tess.getBuffer().pos(vertices[3].xCoord, vertices[3].yCoord, vertices[3].zCoord).tex(0.5D, vMax).endVertex();
 
-        vertices = calculateVertices(0, 1, 0, 0.5D);
+        vertices = calculateVertices(0, 1, 0, 0.5D, 0.7F);
         tess.getBuffer().pos(vertices[0].xCoord, vertices[0].yCoord, vertices[0].zCoord).tex(0.5D, vMax).endVertex();
         tess.getBuffer().pos(vertices[1].xCoord, vertices[1].yCoord, vertices[1].zCoord).tex(0.5D, vMin).endVertex();
         tess.getBuffer().pos(vertices[2].xCoord, vertices[2].yCoord, vertices[2].zCoord).tex(0D, vMin).endVertex();
