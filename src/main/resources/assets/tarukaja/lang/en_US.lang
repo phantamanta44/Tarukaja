@@ -1,0 +1,10 @@
+tarukaja.attribute.accuracy=Accuracy
+tarukaja.attribute.evasion=Evasion
+tarukaja.attribute.weak=Weaknesses
+
+attribute.modifier.plus.3=-%d %s
+attribute.modifier.take.3=?
+attribute.modifier.equals.3=?
+attribute.modifier.plus.4=&= %d %s
+attribute.modifier.take.4=?
+attribute.modifier.equals.4=?
